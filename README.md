@@ -27,7 +27,7 @@ php 编译
 >> groupadd www-data
 
 >> useradd -g www-data www-datai
-
+mysql 备份
 >> mysql 导出 mysqldump -u root -p databasename | gzip > filename_to_compress.sql.gz
 
 >> mysql 导入 gunzip < filename_to_compress.sql.gz  | mysql -u root -pPassWord databasename 
