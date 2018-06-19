@@ -27,7 +27,7 @@ mysql yum [仓库地址](http://dev.mysql.com/downloads/repo/yum/)选择合适�
 
 >> groupadd www-data
 
->> useradd -g www-data www-datai
+>> useradd -g www-data www-data
 
 * mysql 备份
 
