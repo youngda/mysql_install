@@ -31,9 +31,13 @@ mysql yum [仓库地址](http://dev.mysql.com/downloads/repo/yum/)选择合适�
 >> php 报错 ERROR: [pool www] cannot get uid for user 'www'
 
 ```
-groupadd www-data
+cd /usr/local/php/etc/php-fpm.d/
 
-useradd -g www-data www-data
+mv www.conf.default www.conf
+
+groupadd www
+
+useradd -g www-data www
 ```
 
 
@@ -97,6 +101,28 @@ cp /usr/local/lib/libzip/include/zipconf.h /usr/local/include/zipconf.h
 ```
 
 
+```
+cp php.ini-development /usr/local/php/etc/php.ini
+
+cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf
+cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+chmod +x /etc/init.d/php-fpm
+
+
+service php-fpm start
+
+```
+添加 PHP 命令到环境变量
+编辑 ~/.bash_profile，将：
+```
+
+添加：
+PATH=$PATH:$HOME/bin:/usr/local/php/bin
+```
+配置生效：
+```
+source ~/.bash_profile
+```
 * mysql 备份
 
 >> mysql 导出 mysqldump -u root -p databasename | gzip > filename_to_compress.sql.gz
