@@ -62,6 +62,12 @@ ldconfig -v
 
 ```
 
+>> /usr/local/include/zip.h:59:21: fatal error: zipconf.h: No such file or directory
+
+```
+#解决方法：手动复制过去
+cp /usr/local/lib/libzip/include/zipconf.h /usr/local/include/zipconf.h
+```
 * mysql 备份
 
 >> mysql 导出 mysqldump -u root -p databasename | gzip > filename_to_compress.sql.gz
