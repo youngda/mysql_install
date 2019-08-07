@@ -105,10 +105,14 @@ source ~/.bash_profile
 ```
 * mysql 备份
 
-> mysql 导出 mysqldump -u root -p databasename | gzip > filename_to_compress.sql.gz
-
-> mysql 导入 gunzip < filename_to_compress.sql.gz  | mysql -u root -pPassWord databasename 
-
+mysql 导出 
+```
+mysqldump -u root -p databasename | gzip > filename_to_compress.sql.gz
+```
+mysql 导入 
+```
+gunzip < filename_to_compress.sql.gz  | mysql -u root -pPassWord databasename 
+```
 
 # nginx 最新版
 
@@ -130,22 +134,41 @@ yum update
 
 
 # Mysql 安装
+```
+sudo tee /etc/yum.repos.d/MariaDB.repo<<EOF 
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.4/centos7-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+EOF
+```
 
-* 版本选择
-mysql yum [仓库地址](http://dev.mysql.com/downloads/repo/yum/)选择合适的版本。
-如下： 
-> wget https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm 
-* 下载后执行：
-> sudo rpm -Uvh mysql80-community-release-el7-1.noarch.rpm
-* 安装：
-> sudo yum install -y mysql-community-server
-* 启动：
-> sudo systemctl start mysqld.service
-* 查看状态：
-> sudo service mysqld status 或 sudo systemctl status mysqld.service
-* 获取密码：
-> sudo grep 'temporary password' /var/log/mysqld.log
-* 修改密码：
-> mysql -uroot -p
-> ALTER USER 'root'@'localhost' IDENTIFIED BY 'SSssssss22222.';
-> 必须含有大写、小写字母、数字、特殊字符
+```
+sudo yum makecache fast
+
+sudo yum -y install MariaDB-server MariaDB-client
+
+sudo systemctl enable --now mariadb
+
+
+mysql_secure_installation
+```
+
+忘记密码
+```
+systemctl set-environment MYSQLD_OPTS="--skip-grant-tables"
+
+/bin/systemctl restart mariadb.service
+
+mysql -u root
+
+use mysql;
+
+update user SET PASSWORD=PASSWORD("password") WHERE USER='root';
+
+flush privileges;
+
+sudo systemctl restart mariadb
+
+```
