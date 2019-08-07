@@ -68,6 +68,35 @@ ldconfig -v
 #解决方法：手动复制过去
 cp /usr/local/lib/libzip/include/zipconf.h /usr/local/include/zipconf.h
 ```
+
+>> 编译程序时，如果出现类似virtual memory exhausted: Cannot allocate memory的错误时，可以用下面的方法解决。
+
+
+```
+创建swap挂载点
+
+# mkdir /opt/images/
+
+# rm -rf /opt/images/swap
+
+设置挂载swap的大小，64M*32=2GB
+
+# dd if=/dev/zero of=/opt/images/swap bs=64M count=32
+
+# mkswap /opt/images/swap
+开启swap
+
+# swapon /opt/images/swap
+这个时候，可以执行之前内存不足时的命令了，正常情况下，执行时间会比较长，但是能过去
+
+最后，可以考虑关闭swap并删除挂载文件
+
+# swapoff swap
+# rm -f /opt/images/swap
+
+```
+
+
 * mysql 备份
 
 >> mysql 导出 mysqldump -u root -p databasename | gzip > filename_to_compress.sql.gz
