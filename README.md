@@ -40,7 +40,9 @@ mysql yum [仓库地址](http://dev.mysql.com/downloads/repo/yum/)选择合适�
 
 # nginx 最新版
 
->> vim /etc/yum.repos.d/nginx.repo
+``` 
+vim /etc/yum.repos.d/nginx.repo
+```
 
 ```python
 [nginx]
@@ -48,4 +50,7 @@ name=nginx repo
 baseurl=http://nginx.org/packages/mainline/centos/7/$basearch/
 gpgcheck=0
 enabled=1
+```
+```
+yum update
 ```
