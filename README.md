@@ -36,3 +36,16 @@ mysql yum [仓库地址](http://dev.mysql.com/downloads/repo/yum/)选择合适�
 >> mysql 导出 mysqldump -u root -p databasename | gzip > filename_to_compress.sql.gz
 
 >> mysql 导入 gunzip < filename_to_compress.sql.gz  | mysql -u root -pPassWord databasename 
+
+
+# nginx 最新版
+
+>> vim /etc/yum.repos.d/nginx.repo
+
+```python
+[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/mainline/centos/7/$basearch/
+gpgcheck=0
+enabled=1
+```
