@@ -172,3 +172,30 @@ flush privileges;
 sudo systemctl restart mariadb
 
 ```
+
+# Mysql 新建用户&赋远程权限
+
+```
+
+
+// #1.创建一个新用户 testuser 密码为 testuserpass
+
+CREATE USER 'testuser'@'localhost' IDENTIFIED BY 'testuserpass';
+
+// #2.创建数据库testDB
+
+create database testDB;
+
+// #3.执行命令为testuser用户添加使用testDB权限
+
+grant all privileges on testDB.* to testuser@localhost identified by 'testuserpass';
+
+//#4.执行命令，为testuser用户添加远程访问权限
+
+GRANT ALL PRIVILEGES ON testDB.* TO 'testuser'@'%' IDENTIFIED BY 'testuserpass' WITH GRANT OPTION;
+
+// #5.刷新权限表
+
+flush privileges;
+
+```
