@@ -4,7 +4,7 @@
 
 
 ```
- yum -y install readline-devel libpng libpng-devel curl curl-devel bzip2 bzip2-devel  libxml2-devel libxml2 openssl openssl-devel gcc
+ yum -y install readline-devel libpng libpng-devel curl curl-devel bzip2 bzip2-devel  libxml2-devel libxml2 openssl openssl-devel gcc oniguruma-devel oniguruma sqlite-devel
 ```
 
  ```
